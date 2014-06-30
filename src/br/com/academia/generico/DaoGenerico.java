@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.academia.conexao.Conexao;
-import br.com.academia.interfaces.Dao;
+
 
 /**
  * Classe genérica do Dao
