@@ -12,7 +12,7 @@ import br.com.academia.interfaces.Dao;
 /**
  * Classe genérica do Dao
  * */
-public abstract class DaoGenerico<Tipo> implements Dao<Tipo> {
+public abstract class DaoGenerico<Tipo> {
 
 	private EntityManager gerEnt;
 	private Class<Tipo> classePersistente;
@@ -28,7 +28,6 @@ public abstract class DaoGenerico<Tipo> implements Dao<Tipo> {
 		gerEnt = Conexao.getInstanciaConexao();
 	}
 
-	@Override
 	public void salvar(Tipo t) {
 
 		try {
@@ -54,7 +53,6 @@ public abstract class DaoGenerico<Tipo> implements Dao<Tipo> {
 
 	}
 
-	@Override
 	public void atualizar(Tipo t) {
 
 		try {
@@ -80,7 +78,6 @@ public abstract class DaoGenerico<Tipo> implements Dao<Tipo> {
 
 	}
 
-	@Override
 	public void excluir(Integer id) {
 
 		try {
@@ -110,7 +107,6 @@ public abstract class DaoGenerico<Tipo> implements Dao<Tipo> {
 
 	}
 
-	@Override
 	public Tipo carregar(Integer id) {
 
 		Tipo t = (Tipo) gerEnt.find(classePersistente, id);
@@ -119,7 +115,6 @@ public abstract class DaoGenerico<Tipo> implements Dao<Tipo> {
 
 	}
 
-	@Override
 	public List<Tipo> listar(String strConsulta) {
 
 		TypedQuery<Tipo> tpQConsulta = (TypedQuery<Tipo>) gerEnt
