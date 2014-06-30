@@ -14,7 +14,6 @@ import br.com.academia.modelo.Pessoa;
 public class PessoaDaoTeste {
 
 	PessoaDao pessoaDao = new PessoaDao();
-	Pessoa pessoa;
 
 	@Test
 	public void salvarTest() {

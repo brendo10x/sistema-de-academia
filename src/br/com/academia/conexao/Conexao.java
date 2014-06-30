@@ -36,5 +36,5 @@ public class Conexao {
 		// retornando sempre um única instância
 		return conexao;
 
-	}// fim getInstanciaConexaoMysql()
+	}// fim
 }

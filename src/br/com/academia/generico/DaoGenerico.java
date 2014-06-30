@@ -7,27 +7,29 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.academia.conexao.Conexao;
+import br.com.academia.interfaces.Dao;
 
-public abstract class DaoGeneric<Tipo> {
+/**
+ * Classe genérica do Dao
+ * */
+public abstract class DaoGenerico<Tipo> implements Dao<Tipo> {
 
 	private EntityManager gerEnt;
 	private Class<Tipo> classePersistente;
 
 	@SuppressWarnings("unchecked")
-	protected DaoGeneric() {
+	protected DaoGenerico() {
+
+		// obtem a tipo da subclasse
 		classePersistente = (Class<Tipo>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
-	}
-
-	public EntityManager obterEntityManager() {
-
-		return Conexao.getInstanciaConexao();
-	}
-
-	public void salvar(Tipo t) {
 
 		// entrega instância do tipo EntityManager com conexão mysql
-		gerEnt = obterEntityManager();
+		gerEnt = Conexao.getInstanciaConexao();
+	}
+
+	@Override
+	public void salvar(Tipo t) {
 
 		try {
 
@@ -52,10 +54,8 @@ public abstract class DaoGeneric<Tipo> {
 
 	}
 
+	@Override
 	public void atualizar(Tipo t) {
-
-		// entrega instância do tipo EntityManager com conexão mysql
-		gerEnt = obterEntityManager();
 
 		try {
 
@@ -80,9 +80,9 @@ public abstract class DaoGeneric<Tipo> {
 
 	}
 
+	@Override
 	public void excluir(Integer id) {
-		// entrega instância do tipo EntityManager com conexão mysql
-		gerEnt = obterEntityManager();
+
 		try {
 
 			// inicia transação
@@ -110,10 +110,8 @@ public abstract class DaoGeneric<Tipo> {
 
 	}
 
+	@Override
 	public Tipo carregar(Integer id) {
-
-		// entrega instância do tipo EntityManager com conexão mysql
-		gerEnt = obterEntityManager();
 
 		Tipo t = (Tipo) gerEnt.find(classePersistente, id);
 
@@ -121,10 +119,8 @@ public abstract class DaoGeneric<Tipo> {
 
 	}
 
-	protected List<Tipo> listar(String strConsulta) {
-
-		// entrega instância do tipo EntityManager com conexão mysql
-		gerEnt = obterEntityManager();
+	@Override
+	public List<Tipo> listar(String strConsulta) {
 
 		TypedQuery<Tipo> tpQConsulta = (TypedQuery<Tipo>) gerEnt
 				.createNamedQuery(strConsulta, classePersistente);
