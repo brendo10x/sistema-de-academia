@@ -11,7 +11,7 @@ import br.com.brendo.modelo.Pessoa;
 
 public class PessoaDaoTeste {
 
-	// caraaalho!
+	// caraaalhoaa!
 	
 	@Test
 	public void salvarTest() {
