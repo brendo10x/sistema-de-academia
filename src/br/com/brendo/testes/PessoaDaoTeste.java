@@ -11,6 +11,8 @@ import br.com.brendo.modelo.Pessoa;
 
 public class PessoaDaoTeste {
 
+	// O bixo é o cão mermo!
+	
 	@Test
 	public void salvarTest() {
 		Pessoa p = new Pessoa("Filho dad puta", 112);
