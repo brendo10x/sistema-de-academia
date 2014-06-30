@@ -1,4 +1,4 @@
-package br.com.brendo.generico;
+package br.com.academia.generico;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.brendo.conexao.Conexao;
+import br.com.academia.conexao.Conexao;
 
 public abstract class DaoGeneric<Tipo> {
 

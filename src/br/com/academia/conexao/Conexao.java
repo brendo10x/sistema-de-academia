@@ -1,4 +1,4 @@
-package br.com.brendo.conexao;
+package br.com.academia.conexao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

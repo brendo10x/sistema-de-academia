@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.brendo.controle;
+package br.com.academia.controle;
 
-import br.com.brendo.dao.PessoaDao;
+import br.com.academia.dao.PessoaDao;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;

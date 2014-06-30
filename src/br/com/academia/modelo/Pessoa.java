@@ -1,4 +1,4 @@
-package br.com.brendo.modelo;
+package br.com.academia.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

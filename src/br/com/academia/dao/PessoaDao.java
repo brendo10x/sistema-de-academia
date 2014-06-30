@@ -1,9 +1,9 @@
-package br.com.brendo.dao;
+package br.com.academia.dao;
 
 import java.util.List;
 
-import br.com.brendo.generico.DaoGeneric;
-import br.com.brendo.modelo.Pessoa;
+import br.com.academia.generico.DaoGeneric;
+import br.com.academia.modelo.Pessoa;
 import br.com.caelum.vraptor.ioc.Component;
 
 @Component
