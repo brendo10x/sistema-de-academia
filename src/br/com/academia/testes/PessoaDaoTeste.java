@@ -2,8 +2,6 @@ package br.com.academia.testes;
 
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
