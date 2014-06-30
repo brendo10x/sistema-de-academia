@@ -11,11 +11,9 @@ import br.com.brendo.modelo.Pessoa;
 
 public class PessoaDaoTeste {
 
-	// caraaalhoaa!
-	
 	@Test
 	public void salvarTest() {
-		Pessoa p = new Pessoa("Filho dad puta", 112);
+		Pessoa p = new Pessoa("Filasdasduta", 112);
 
 		PessoaDao pDao = new PessoaDao();
 
@@ -26,7 +24,6 @@ public class PessoaDaoTeste {
 	}
 
 	@Test
-	@Ignore
 	public void atualizarTest() {
 		Pessoa p = new Pessoa(19, "Gostosa de mais", 19);
 		PessoaDao pDao = new PessoaDao();
@@ -38,7 +35,6 @@ public class PessoaDaoTeste {
 	}
 
 	@Test
-	@Ignore
 	public void excluirTest() {
 		PessoaDao pDao = new PessoaDao();
 
@@ -55,6 +51,7 @@ public class PessoaDaoTeste {
 		PessoaDao pDao = new PessoaDao();
 
 		Pessoa p = pDao.carregar(19);
+
 		/*
 		 * JOptionPane.showMessageDialog(null, "Id: " + p.getId());
 		 * JOptionPane.showMessageDialog(null, "Nome: " + p.getNome());

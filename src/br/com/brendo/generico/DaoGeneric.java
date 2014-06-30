@@ -19,12 +19,12 @@ public abstract class DaoGeneric<Tipo> {
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
-	protected EntityManager obterEntityManager() {
+	public EntityManager obterEntityManager() {
 
 		return Conexao.getInstanciaConexao();
 	}
 
-	protected void salvar(Tipo t) {
+	public void salvar(Tipo t) {
 
 		// entrega instância do tipo EntityManager com conexão mysql
 		gerEnt = obterEntityManager();
@@ -50,11 +50,9 @@ public abstract class DaoGeneric<Tipo> {
 
 		}// fim catch e try
 
-		// fecha conexão
-		gerEnt.close();
 	}
 
-	protected void atualizar(Tipo t) {
+	public void atualizar(Tipo t) {
 
 		// entrega instância do tipo EntityManager com conexão mysql
 		gerEnt = obterEntityManager();
@@ -80,11 +78,9 @@ public abstract class DaoGeneric<Tipo> {
 
 		}// fim catch e try
 
-		// fecha conexão
-		gerEnt.close();
 	}
 
-	protected void excluir(Integer id) {
+	public void excluir(Integer id) {
 		// entrega instância do tipo EntityManager com conexão mysql
 		gerEnt = obterEntityManager();
 		try {
@@ -112,21 +108,15 @@ public abstract class DaoGeneric<Tipo> {
 
 		}// fim catch e try
 
-		// fecha conexão
-		gerEnt.close();
 	}
 
-	protected Tipo carregar(Integer id) {
+	public Tipo carregar(Integer id) {
 
 		// entrega instância do tipo EntityManager com conexão mysql
 		gerEnt = obterEntityManager();
 
 		Tipo t = (Tipo) gerEnt.find(classePersistente, id);
 
-		// fecha conexão
-		gerEnt.close();
-
-		// retorna cliente
 		return t;
 
 	}
