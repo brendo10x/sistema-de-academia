@@ -11,7 +11,7 @@ import br.com.brendo.modelo.Pessoa;
 
 public class PessoaDaoTeste {
 
-	// O bixo é o cão mermo!
+	// O bixo é o cão mermooo!
 	
 	@Test
 	public void salvarTest() {
