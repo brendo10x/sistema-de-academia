@@ -19,7 +19,7 @@ public class PessoaDaoTeste {
 
 		pessoaDao.salvar(p);
 
-		Assert.assertTrue(true);
+		Assert.assertTrue("Foi boa carai",true);
 
 	}
 
@@ -56,7 +56,6 @@ public class PessoaDaoTeste {
 	}
 
 	@Test
-	@Ignore
 	public void listar() {
 
 		List<Pessoa> ps = pessoaDao.listarOrdemPorNome();
