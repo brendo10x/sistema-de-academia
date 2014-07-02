@@ -2,10 +2,10 @@ package br.com.academia.testes;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
+import javax.swing.JOptionPane;
+
 import org.junit.Test;
+
 import br.com.academia.dao.MedidaDao;
 import br.com.academia.modelo.Medida;
 
@@ -13,67 +13,53 @@ import br.com.academia.modelo.Medida;
 
 public class MedidaDaoTest {
 
-	private MedidaDao medidaDao = new MedidaDao();
+	private MedidaDao dao = new MedidaDao();
 	private Medida medida;
 
-	@Before
-	public void antesDoTeste() {
-		System.out.println("Inicia teste");
-
-	}
-
-	@After
-	public void depoisDoTeste() {
-		System.out.println("Termina teste");
-	}
+	private Integer ID_EXCLUSAO = 11;
+	private Integer ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR = 6;
 
 	@Test
-	@Ignore
-	public final void testSalvar() {
+	public void testSalvar() {
 		medida = new Medida();
 		medida.setCampo(2);
 		medida.setLocal("Panturilha");
-		medidaDao.salvar(medida);
+		dao.salvar(medida);
 
-		medida = new Medida();
-		medida.setCampo(1);
-		medida.setLocal("Caralho");
-		medidaDao.salvar(medida);
 	}
 
 	@Test
-	@Ignore
-	public final void testAtualizar() {
-		medida = medidaDao.carregar(2);
-		medida.setLocal("Localzinho");
-		medidaDao.atualizar(medida);
-	}
+	public void testCarregar() {
+		medida = dao.carregar(ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR);
 
-	@Test
-	@Ignore
-	public final void testCarregar() {
-		medida = medidaDao.carregar(2);
 		System.out.println(medida.getCampo());
 		System.out.println(medida.getLocal());
 		System.out.println(medida.getId());
 	}
 
 	@Test
-	@Ignore
-	public final void testListar() {
+	public void testExcluir() {
 
-		List<Medida> medidas = medidaDao.listarTodos();
+		dao.excluir(ID_EXCLUSAO);
+	}
+
+	@Test
+	public void testAtualizar() {
+
+		medida = dao.carregar(ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR);
+		medida.setLocal("Localzinho");
+		dao.atualizar(medida);
+	}
+
+	@Test
+	public void testListar() {
+
+		List<Medida> medidas = dao.listarTodos();
 		for (Medida medida : medidas) {
 			System.out.println(medida.getCampo());
 			System.out.println(medida.getLocal());
 			System.out.println(medida.getId());
 		}
-	}
-
-	@Test
-	@Ignore
-	public final void testExcluir() {
-		medidaDao.excluir(2);
 	}
 
 }

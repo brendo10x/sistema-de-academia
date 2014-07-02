@@ -9,6 +9,5 @@ public class MedidaDao extends DaoGenerico<Medida> {
 
 	public List<Medida> listarTodos() {
 		return super.listar("Medida.findAll");
-
 	}
 }

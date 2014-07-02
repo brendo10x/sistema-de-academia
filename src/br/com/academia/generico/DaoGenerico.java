@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 
 import br.com.academia.conexao.Conexao;
 
@@ -15,6 +18,7 @@ public abstract class DaoGenerico<Tipo> {
 
 	private EntityManager gerEnt;
 	private Class<Tipo> classePersistente;
+	public Integer ultimoID;
 
 	@SuppressWarnings("unchecked")
 	protected DaoGenerico() {
@@ -107,8 +111,6 @@ public abstract class DaoGenerico<Tipo> {
 	}
 
 	public Tipo carregar(Integer id) {
-		// entrega instância do tipo EntityManager com conexão mysql
-		gerEnt = Conexao.getInstanciaConexao();
 
 		Tipo t = (Tipo) gerEnt.find(classePersistente, id);
 
@@ -125,4 +127,5 @@ public abstract class DaoGenerico<Tipo> {
 
 		return resultados;
 	}
+
 }

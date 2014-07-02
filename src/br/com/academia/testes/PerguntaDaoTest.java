@@ -1,36 +1,57 @@
 package br.com.academia.testes;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
 import org.junit.Test;
 
+import br.com.academia.dao.PerguntaDao;
+import br.com.academia.modelo.Pergunta;
+
+//Classe OK
 public class PerguntaDaoTest {
 
-	 
+	private PerguntaDao dao = new PerguntaDao();
+	private Pergunta pergunta;
+
+	private Integer ID_EXCLUSAO = 2;
+	private Integer ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR = 3;
 
 	@Test
-	public final void testSalvar() {
-		fail("Not yet implemented"); // TODO
+	public void testSalvar() {
+		pergunta = new Pergunta();
+		pergunta.setDescricao("PerguntaDaoPerguntaDaoPerguntaDao");
+		dao.salvar(pergunta);
+
 	}
 
 	@Test
-	public final void testAtualizar() {
-		fail("Not yet implemented"); // TODO
+	public void testCarregar() {
+		pergunta = dao.carregar(ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR);
+		System.out.println(pergunta.getDescricao());
 	}
 
 	@Test
-	public final void testExcluir() {
-		fail("Not yet implemented"); // TODO
+	public void testExcluir() {
+
+		dao.excluir(ID_EXCLUSAO);
 	}
 
 	@Test
-	public final void testCarregar() {
-		fail("Not yet implemented"); // TODO
+	public void testAtualizar() {
+
+		pergunta = dao.carregar(ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR);
+		pergunta.setDescricao("Pergunta atualizada");
+		dao.atualizar(pergunta);
 	}
 
 	@Test
-	public final void testListar() {
-		fail("Not yet implemented"); // TODO
+	public void testListar() {
+
+		List<Pergunta> perguntas = dao.listarTodos();
+		for (Pergunta pergunta : perguntas) {
+			System.out.println(pergunta.getDescricao());
+
+		}
 	}
 
 }

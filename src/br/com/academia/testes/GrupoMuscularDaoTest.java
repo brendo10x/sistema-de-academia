@@ -2,35 +2,61 @@ package br.com.academia.testes;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
+import br.com.academia.dao.GrupoMuscularDao;
+import br.com.academia.modelo.GrupoMuscular;
+
+//Classe OK
+
 public class GrupoMuscularDaoTest {
- 
- 
+
+	private GrupoMuscularDao dao = new GrupoMuscularDao();
+	private GrupoMuscular grupoMuscular;
+
+	private Integer ID_EXCLUSAO = 3;
+	private Integer ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR = 4;
 
 	@Test
-	public final void testSalvar() {
-		fail("Not yet implemented"); // TODO
+	public void testSalvar() {
+
+		grupoMuscular = new GrupoMuscular();
+		grupoMuscular.setNome("Biceps");
+		dao.salvar(grupoMuscular);
 	}
 
 	@Test
-	public final void testAtualizar() {
-		fail("Not yet implemented"); // TODO
+	public void testAtualizar() {
+
+		grupoMuscular = dao.carregar(ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR);
+		grupoMuscular.setNome("Buceta atualizada!");
+		dao.atualizar(grupoMuscular);
 	}
 
 	@Test
-	public final void testExcluir() {
-		fail("Not yet implemented"); // TODO
+	public void testCarregar() {
+
+		grupoMuscular = dao.carregar(ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR);
+		System.out.println(grupoMuscular.getNome());
 	}
 
 	@Test
-	public final void testCarregar() {
-		fail("Not yet implemented"); // TODO
+	public void testListar() {
+
+		List<GrupoMuscular> lista = dao.listarTodos();
+
+		for (GrupoMuscular grupoMuscular : lista) {
+			System.out.println(grupoMuscular.getNome());
+		}
+
 	}
 
 	@Test
-	public final void testListar() {
-		fail("Not yet implemented"); // TODO
+	public void testExcluir() {
+
+		dao.excluir(ID_EXCLUSAO);
 	}
 
 }
