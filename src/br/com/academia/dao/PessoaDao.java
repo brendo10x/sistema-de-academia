@@ -8,7 +8,8 @@ import br.com.caelum.vraptor.ioc.Component;
 
 @Component
 public class PessoaDao extends DaoGenerico<Pessoa> {
-
+	
+	//Padrão de projeto Adapter
 	public List<Pessoa> listarOrdemPorNome() {
 
 		List<Pessoa> listaOrdemPorNome = super.listar("listarOrdemPorNome");

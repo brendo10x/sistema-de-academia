@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+//Aplicando o padrão de projeto Singleton
 public class Conexao {
 
 	// variáveis de fábricas de gerenciador de entidades
