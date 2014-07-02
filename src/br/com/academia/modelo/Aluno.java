@@ -37,7 +37,7 @@ import br.com.academia.enums.TipoSexo;
  * @author Brendo
  */
 @Entity
-@Table(name = "aluno", catalog = "sistema-academia", schema = "")
+@Table(name = "aluno")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a"),

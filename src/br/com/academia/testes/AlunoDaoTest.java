@@ -2,11 +2,13 @@ package br.com.academia.testes;
 
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.academia.dao.AlunoDao;
-import br.com.academia.modeloBackup.Aluno;
+import br.com.academia.modelo.Aluno;
 
 public class AlunoDaoTest {
 
@@ -15,7 +17,7 @@ public class AlunoDaoTest {
 
 	@Test
 	public final void testListar() {
-
+		 aluno = alunoDao.carregar(1);
 	}
 
 	@Test

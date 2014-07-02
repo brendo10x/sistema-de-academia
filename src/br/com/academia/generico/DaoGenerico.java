@@ -116,7 +116,7 @@ public abstract class DaoGenerico<Tipo> {
 
 	}
 
-	protected List<Tipo> listar(String strConsulta) {
+	public List<Tipo> listar(String strConsulta) {
 
 		TypedQuery<Tipo> tpQConsulta = (TypedQuery<Tipo>) gerEnt
 				.createNamedQuery(strConsulta, classePersistente);

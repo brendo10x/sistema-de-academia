@@ -30,7 +30,7 @@ import br.com.academia.enums.TipoMembro;
  * @author Brendo
  */
 @Entity
-@Table(name = "valor_medida", catalog = "sistema-academia", schema = "")
+@Table(name = "valor_medida")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "ValorMedida.findAll", query = "SELECT v FROM ValorMedida v"),

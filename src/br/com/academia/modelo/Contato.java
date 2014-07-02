@@ -30,7 +30,7 @@ import br.com.academia.enums.TipoContato;
  * @author Brendo
  */
 @Entity
-@Table(name = "contato", catalog = "sistema-academia", schema = "")
+@Table(name = "contato")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "Contato.findAll", query = "SELECT c FROM Contato c"),

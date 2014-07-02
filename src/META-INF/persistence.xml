@@ -9,7 +9,7 @@
 		<properties>
 
 			<!--Banco de dados -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/mydb" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/sistema-academia" />
 
 			<!--Senha -->
 			<property name="javax.persistence.jdbc.password" value="" />
