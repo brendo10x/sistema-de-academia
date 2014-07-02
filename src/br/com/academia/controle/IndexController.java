@@ -16,7 +16,6 @@
  */
 package br.com.academia.controle;
 
-import br.com.academia.dao.PessoaDao;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
@@ -25,16 +24,15 @@ import br.com.caelum.vraptor.Result;
 public class IndexController {
 
 	private final Result result;
-	private PessoaDao pessoaDao;
 
-	public IndexController(Result result, PessoaDao pessoaDao) {
+	public IndexController(Result result) {
 		this.result = result;
-		this.pessoaDao = pessoaDao;
+
 	}
 
 	@Path("/")
 	public void index() {
-		result.include("pessoas", pessoaDao.listarOrdemPorNome());
+		// result.include("pessoas", pessoaDao.listarOrdemPorNome());
 	}
 
 }
