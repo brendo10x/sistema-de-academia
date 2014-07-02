@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType; 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brendo
  */
 @Entity
+@Table(name = "treino", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Treino.findAll", query = "SELECT t FROM Treino t"),
@@ -43,14 +45,15 @@ public class Treino implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
+    @Column(name = "inicio")
     @Temporal(TemporalType.DATE)
     private Date inicio;
     @Column(name = "dia_semana")
     private Integer diaSemana;
-  
-    @Column(length = 255)
+ 
+    @Column(name = "objetivo", length = 255)
     private String objetivo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "treinoId")
     private List<TreinoExercicio> treinoExercicioList;

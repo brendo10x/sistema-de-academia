@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Brendo
  */
 @Entity
-@Table(name = "treino_exercicio")
+@Table(name = "treino_exercicio", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TreinoExercicio.findAll", query = "SELECT t FROM TreinoExercicio t"),
@@ -38,19 +38,21 @@ public class TreinoExercicio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
+    @Column(name = "serie")
     private Integer serie;
+    @Column(name = "repeticoes")
     private Integer repeticoes;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 3, scale = 2)
+    @Column(name = "peso", precision = 3, scale = 2)
     private Double peso;
-    @JoinColumn(name = "treino_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private Treino treinoId;
     @JoinColumn(name = "exercicio_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Exercicio exercicioId;
+    @JoinColumn(name = "treino_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private Treino treinoId;
 
     public TreinoExercicio() {
     }
@@ -91,20 +93,20 @@ public class TreinoExercicio implements Serializable {
         this.peso = peso;
     }
 
-    public Treino getTreinoId() {
-        return treinoId;
-    }
-
-    public void setTreinoId(Treino treinoId) {
-        this.treinoId = treinoId;
-    }
-
     public Exercicio getExercicioId() {
         return exercicioId;
     }
 
     public void setExercicioId(Exercicio exercicioId) {
         this.exercicioId = exercicioId;
+    }
+
+    public Treino getTreinoId() {
+        return treinoId;
+    }
+
+    public void setTreinoId(Treino treinoId) {
+        this.treinoId = treinoId;
     }
 
     @Override

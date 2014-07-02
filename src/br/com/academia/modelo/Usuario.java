@@ -17,7 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany; 
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brendo
  */
 @Entity
+@Table(name = "usuario", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
@@ -38,20 +40,17 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(nullable = false)
+	@Column(name = "id", nullable = false)
 	private Integer id;
 	@Basic(optional = false)
-	@Column(nullable = false, length = 45)
+	@Column(name = "nome", nullable = false, length = 45)
 	private String nome;
-	// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-	// message="E-mail inválido")//if the field contains email address consider
-	// using this annotation to enforce field validation
+
 	@Basic(optional = false)
-	@Column(nullable = false, length = 45)
+	@Column(name = "email", nullable = false, length = 45)
 	private String email;
 	@Basic(optional = false)
- 
-	@Column(nullable = false, length = 45)
+	@Column(name = "senha", nullable = false, length = 45)
 	private String senha;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
 	private List<Treinador> treinadorList;

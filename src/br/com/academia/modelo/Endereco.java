@@ -19,135 +19,139 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany; 
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
+ * 
  * @author Brendo
  */
 @Entity
+@Table(name = "endereco", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Endereco.findAll", query = "SELECT e FROM Endereco e"),
-    @NamedQuery(name = "Endereco.findById", query = "SELECT e FROM Endereco e WHERE e.id = :id"),
-    @NamedQuery(name = "Endereco.findByRua", query = "SELECT e FROM Endereco e WHERE e.rua = :rua"),
-    @NamedQuery(name = "Endereco.findByNumero", query = "SELECT e FROM Endereco e WHERE e.numero = :numero"),
-    @NamedQuery(name = "Endereco.findByBairro", query = "SELECT e FROM Endereco e WHERE e.bairro = :bairro"),
-    @NamedQuery(name = "Endereco.findByCep", query = "SELECT e FROM Endereco e WHERE e.cep = :cep")})
+		@NamedQuery(name = "Endereco.findAll", query = "SELECT e FROM Endereco e"),
+		@NamedQuery(name = "Endereco.findById", query = "SELECT e FROM Endereco e WHERE e.id = :id"),
+		@NamedQuery(name = "Endereco.findByRua", query = "SELECT e FROM Endereco e WHERE e.rua = :rua"),
+		@NamedQuery(name = "Endereco.findByNumero", query = "SELECT e FROM Endereco e WHERE e.numero = :numero"),
+		@NamedQuery(name = "Endereco.findByBairro", query = "SELECT e FROM Endereco e WHERE e.bairro = :bairro"),
+		@NamedQuery(name = "Endereco.findByCep", query = "SELECT e FROM Endereco e WHERE e.cep = :cep") })
 public class Endereco implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private Integer id;
- 
-    @Column(length = 70)
-    private String rua;
-   
-    @Column(length = 45)
-    private String numero;
-    
-    @Column(length = 45)
-    private String bairro;
- 
-    @Column(length = 45)
-    private String cep;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "enderecoId")
-    private List<Aluno> alunoList;
-    @JoinColumn(name = "cidade_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private Cidade cidadeId;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    public Endereco() {
-    }
+	@Column(name = "rua", length = 70)
+	private String rua;
 
-    public Endereco(Integer id) {
-        this.id = id;
-    }
+	@Column(name = "numero", length = 45)
+	private String numero;
 
-    public Integer getId() {
-        return id;
-    }
+	@Column(name = "bairro", length = 45)
+	private String bairro;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	@Column(name = "cep", length = 45)
+	private String cep;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "enderecoId")
+	private List<Aluno> alunoList;
+	@JoinColumn(name = "cidade_id", referencedColumnName = "id", nullable = false)
+	@ManyToOne(optional = false)
+	private Cidade cidadeId;
 
-    public String getRua() {
-        return rua;
-    }
+	public Endereco() {
+	}
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
+	public Endereco(Integer id) {
+		this.id = id;
+	}
 
-    public String getNumero() {
-        return numero;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getBairro() {
-        return bairro;
-    }
+	public String getRua() {
+		return rua;
+	}
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
 
-    public String getCep() {
-        return cep;
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-    @XmlTransient
-    public List<Aluno> getAlunoList() {
-        return alunoList;
-    }
+	public String getBairro() {
+		return bairro;
+	}
 
-    public void setAlunoList(List<Aluno> alunoList) {
-        this.alunoList = alunoList;
-    }
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
-    public Cidade getCidadeId() {
-        return cidadeId;
-    }
+	public String getCep() {
+		return cep;
+	}
 
-    public void setCidadeId(Cidade cidadeId) {
-        this.cidadeId = cidadeId;
-    }
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	@XmlTransient
+	public List<Aluno> getAlunoList() {
+		return alunoList;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Endereco)) {
-            return false;
-        }
-        Endereco other = (Endereco) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	public void setAlunoList(List<Aluno> alunoList) {
+		this.alunoList = alunoList;
+	}
 
-    @Override
-    public String toString() {
-        return "gerador.Endereco[ id=" + id + " ]";
-    }
-    
+	public Cidade getCidadeId() {
+		return cidadeId;
+	}
+
+	public void setCidadeId(Cidade cidadeId) {
+		this.cidadeId = cidadeId;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are
+		// not set
+		if (!(object instanceof Endereco)) {
+			return false;
+		}
+		Endereco other = (Endereco) object;
+		if ((this.id == null && other.id != null)
+				|| (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "gerador.Endereco[ id=" + id + " ]";
+	}
+
 }

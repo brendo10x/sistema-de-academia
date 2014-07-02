@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brendo
  */
 @Entity
-@Table(name = "aluno_medida")
+@Table(name = "aluno_medida", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AlunoMedida.findAll", query = "SELECT a FROM AlunoMedida a"),
@@ -43,11 +43,12 @@ public class AlunoMedida implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
+    @Column(name = "inicio")
     @Temporal(TemporalType.DATE)
     private Date inicio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoMedida")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoMedidaId")
     private List<AlunoTemMedida> alunoTemMedidaList;
     @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)

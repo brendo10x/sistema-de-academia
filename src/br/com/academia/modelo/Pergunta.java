@@ -17,7 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany; 
+import javax.persistence.OneToMany;
+import javax.persistence.Table; 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brendo
  */
 @Entity
+@Table(name = "pergunta", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pergunta.findAll", query = "SELECT p FROM Pergunta p"),
@@ -36,10 +38,10 @@ public class Pergunta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
-     
-    @Column(length = 200)
+ 
+    @Column(name = "descricao", length = 200)
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perguntaId")
     private List<ValorObservacao> valorObservacaoList;

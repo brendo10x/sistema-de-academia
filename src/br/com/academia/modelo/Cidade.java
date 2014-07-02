@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table; 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brendo
  */
 @Entity
+@Table(name = "cidade", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "Cidade.findAll", query = "SELECT c FROM Cidade c"),
@@ -39,13 +41,13 @@ public class Cidade implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(nullable = false)
+	@Column(name = "id", nullable = false)
 	private Integer id;
 
-	@Column(length = 2)
+	@Column(name = "sigla", length = 2)
 	private String sigla;
 
-	@Column(length = 50)
+	@Column(name = "nome", length = 50)
 	private String nome;
 	@JoinColumn(name = "estado_id", referencedColumnName = "id", nullable = false)
 	@ManyToOne(optional = false)

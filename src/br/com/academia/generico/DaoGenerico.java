@@ -8,7 +8,6 @@ import javax.persistence.TypedQuery;
 
 import br.com.academia.conexao.Conexao;
 
-
 /**
  * Classe genérica do Dao
  * */
@@ -108,6 +107,8 @@ public abstract class DaoGenerico<Tipo> {
 	}
 
 	public Tipo carregar(Integer id) {
+		// entrega instância do tipo EntityManager com conexão mysql
+		gerEnt = Conexao.getInstanciaConexao();
 
 		Tipo t = (Tipo) gerEnt.find(classePersistente, id);
 
@@ -115,7 +116,7 @@ public abstract class DaoGenerico<Tipo> {
 
 	}
 
-	public List<Tipo> listar(String strConsulta) {
+	protected List<Tipo> listar(String strConsulta) {
 
 		TypedQuery<Tipo> tpQConsulta = (TypedQuery<Tipo>) gerEnt
 				.createNamedQuery(strConsulta, classePersistente);

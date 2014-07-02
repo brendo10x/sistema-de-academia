@@ -8,10 +8,13 @@ package br.com.academia.modelo;
 
 import java.io.Serializable;
 import java.util.List;
-
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -26,59 +29,56 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brendo
  */
 @Entity
-@Table(name = "aluno_tem_medida")
+@Table(name = "aluno_tem_medida", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AlunoTemMedida.findAll", query = "SELECT a FROM AlunoTemMedida a"),
-    @NamedQuery(name = "AlunoTemMedida.findById", query = "SELECT a FROM AlunoTemMedida a WHERE a.alunoTemMedidaPK.id = :id"),
-    @NamedQuery(name = "AlunoTemMedida.findByAlunoMedidaId", query = "SELECT a FROM AlunoTemMedida a WHERE a.alunoTemMedidaPK.alunoMedidaId = :alunoMedidaId"),
-    @NamedQuery(name = "AlunoTemMedida.findByMedidaId", query = "SELECT a FROM AlunoTemMedida a WHERE a.alunoTemMedidaPK.medidaId = :medidaId")})
+    @NamedQuery(name = "AlunoTemMedida.findById", query = "SELECT a FROM AlunoTemMedida a WHERE a.id = :id")})
 public class AlunoTemMedida implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AlunoTemMedidaPK alunoTemMedidaPK;
-    @JoinColumn(name = "medida_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+    @JoinColumn(name = "medida_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Medida medida;
-    @JoinColumn(name = "aluno_medida_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    private Medida medidaId;
+    @JoinColumn(name = "aluno_medida_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private AlunoMedida alunoMedida;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoTemMedidaId")
+    private AlunoMedida alunoMedidaId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoTemMedidaId1")
     private List<ValorMedida> valorMedidaList;
 
     public AlunoTemMedida() {
     }
 
-    public AlunoTemMedida(AlunoTemMedidaPK alunoTemMedidaPK) {
-        this.alunoTemMedidaPK = alunoTemMedidaPK;
+    public AlunoTemMedida(Integer id) {
+        this.id = id;
     }
 
-    public AlunoTemMedida(int id, int alunoMedidaId, int medidaId) {
-        this.alunoTemMedidaPK = new AlunoTemMedidaPK(id, alunoMedidaId, medidaId);
+    public Integer getId() {
+        return id;
     }
 
-    public AlunoTemMedidaPK getAlunoTemMedidaPK() {
-        return alunoTemMedidaPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setAlunoTemMedidaPK(AlunoTemMedidaPK alunoTemMedidaPK) {
-        this.alunoTemMedidaPK = alunoTemMedidaPK;
+    public Medida getMedidaId() {
+        return medidaId;
     }
 
-    public Medida getMedida() {
-        return medida;
+    public void setMedidaId(Medida medidaId) {
+        this.medidaId = medidaId;
     }
 
-    public void setMedida(Medida medida) {
-        this.medida = medida;
+    public AlunoMedida getAlunoMedidaId() {
+        return alunoMedidaId;
     }
 
-    public AlunoMedida getAlunoMedida() {
-        return alunoMedida;
-    }
-
-    public void setAlunoMedida(AlunoMedida alunoMedida) {
-        this.alunoMedida = alunoMedida;
+    public void setAlunoMedidaId(AlunoMedida alunoMedidaId) {
+        this.alunoMedidaId = alunoMedidaId;
     }
 
     @XmlTransient
@@ -93,7 +93,7 @@ public class AlunoTemMedida implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (alunoTemMedidaPK != null ? alunoTemMedidaPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +104,7 @@ public class AlunoTemMedida implements Serializable {
             return false;
         }
         AlunoTemMedida other = (AlunoTemMedida) object;
-        if ((this.alunoTemMedidaPK == null && other.alunoTemMedidaPK != null) || (this.alunoTemMedidaPK != null && !this.alunoTemMedidaPK.equals(other.alunoTemMedidaPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -112,7 +112,7 @@ public class AlunoTemMedida implements Serializable {
 
     @Override
     public String toString() {
-        return "gerador.AlunoTemMedida[ alunoTemMedidaPK=" + alunoTemMedidaPK + " ]";
+        return "gerador.AlunoTemMedida[ id=" + id + " ]";
     }
     
 }

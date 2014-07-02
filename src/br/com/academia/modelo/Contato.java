@@ -7,106 +7,117 @@
 package br.com.academia.modelo;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery; 
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.academia.enums.TipoContato;
+
 /**
- *
+ * 
  * @author Brendo
  */
 @Entity
+@Table(name = "contato", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Contato.findAll", query = "SELECT c FROM Contato c"),
-    @NamedQuery(name = "Contato.findById", query = "SELECT c FROM Contato c WHERE c.id = :id"),
-    @NamedQuery(name = "Contato.findByTipo", query = "SELECT c FROM Contato c WHERE c.tipo = :tipo"),
-    @NamedQuery(name = "Contato.findByValor", query = "SELECT c FROM Contato c WHERE c.valor = :valor")})
+		@NamedQuery(name = "Contato.findAll", query = "SELECT c FROM Contato c"),
+		@NamedQuery(name = "Contato.findById", query = "SELECT c FROM Contato c WHERE c.id = :id"),
+		@NamedQuery(name = "Contato.findByTipo", query = "SELECT c FROM Contato c WHERE c.tipo = :tipo"),
+		@NamedQuery(name = "Contato.findByValor", query = "SELECT c FROM Contato c WHERE c.valor = :valor") })
 public class Contato implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private Integer id;
-    private Integer tipo;
-     
-    @Column(length = 45)
-    private String valor;
-    @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private Aluno alunoId;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id", nullable = false)
+	private Integer id;
+	@Column(name = "tipo")
+	@Enumerated(EnumType.ORDINAL)
+	private TipoContato tipo;
 
-    public Contato() {
-    }
+	@Column(name = "valor", length = 45)
+	private String valor;
+	@JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
+	@ManyToOne(optional = false)
+	private Aluno alunoId;
 
-    public Contato(Integer id) {
-        this.id = id;
-    }
+	public Contato() {
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Contato(Integer id) {
+		this.id = id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getTipo() {
-        return tipo;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setTipo(Integer tipo) {
-        this.tipo = tipo;
-    }
+	public TipoContato getTipo() {
+		return tipo;
+	}
 
-    public String getValor() {
-        return valor;
-    }
+	public void setTipo(TipoContato tipo) {
+		this.tipo = tipo;
+	}
 
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
+	public String getValor() {
+		return valor;
+	}
 
-    public Aluno getAlunoId() {
-        return alunoId;
-    }
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
 
-    public void setAlunoId(Aluno alunoId) {
-        this.alunoId = alunoId;
-    }
+	public Aluno getAlunoId() {
+		return alunoId;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public void setAlunoId(Aluno alunoId) {
+		this.alunoId = alunoId;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contato)) {
-            return false;
-        }
-        Contato other = (Contato) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
 
-    @Override
-    public String toString() {
-        return "gerador.Contato[ id=" + id + " ]";
-    }
-    
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are
+		// not set
+		if (!(object instanceof Contato)) {
+			return false;
+		}
+		Contato other = (Contato) object;
+		if ((this.id == null && other.id != null)
+				|| (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "gerador.Contato[ id=" + id + " ]";
+	}
+
 }

@@ -14,6 +14,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,190 +24,198 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import br.com.academia.enums.TipoSexo;
+
 /**
- *
+ * 
  * @author Brendo
  */
 @Entity
+@Table(name = "aluno", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a"),
-    @NamedQuery(name = "Aluno.findById", query = "SELECT a FROM Aluno a WHERE a.id = :id"),
-    @NamedQuery(name = "Aluno.findByNome", query = "SELECT a FROM Aluno a WHERE a.nome = :nome"),
-    @NamedQuery(name = "Aluno.findBySexo", query = "SELECT a FROM Aluno a WHERE a.sexo = :sexo"),
-    @NamedQuery(name = "Aluno.findByDataNascimento", query = "SELECT a FROM Aluno a WHERE a.dataNascimento = :dataNascimento"),
-    @NamedQuery(name = "Aluno.findByPeso", query = "SELECT a FROM Aluno a WHERE a.peso = :peso"),
-    @NamedQuery(name = "Aluno.findByAltura", query = "SELECT a FROM Aluno a WHERE a.altura = :altura"),
-    @NamedQuery(name = "Aluno.findByCodigoAcesso", query = "SELECT a FROM Aluno a WHERE a.codigoAcesso = :codigoAcesso")})
+		@NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a"),
+		@NamedQuery(name = "Aluno.findById", query = "SELECT a FROM Aluno a WHERE a.id = :id"),
+		@NamedQuery(name = "Aluno.findByNome", query = "SELECT a FROM Aluno a WHERE a.nome = :nome"),
+		@NamedQuery(name = "Aluno.findBySexo", query = "SELECT a FROM Aluno a WHERE a.sexo = :sexo"),
+		@NamedQuery(name = "Aluno.findByDataNascimento", query = "SELECT a FROM Aluno a WHERE a.dataNascimento = :dataNascimento"),
+		@NamedQuery(name = "Aluno.findByPeso", query = "SELECT a FROM Aluno a WHERE a.peso = :peso"),
+		@NamedQuery(name = "Aluno.findByAltura", query = "SELECT a FROM Aluno a WHERE a.altura = :altura"),
+		@NamedQuery(name = "Aluno.findByCodigoAcesso", query = "SELECT a FROM Aluno a WHERE a.codigoAcesso = :codigoAcesso") })
 public class Aluno implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private Integer id;
-    
-    @Column(length = 200)
-    private String nome;
-    private Integer sexo;
-    @Column(name = "data_nascimento")
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 3, scale = 2)
-    private Double peso;
-    @Column(precision = 2, scale = 2)
-    private Double altura;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    @Column(name = "codigo_acesso", length = 45)
-    private String codigoAcesso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
-    private List<Contato> contatoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
-    private List<Observacao> observacaoList;
-    @JoinColumn(name = "endereco_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private Endereco enderecoId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
-    private List<Treino> treinoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
-    private List<AlunoMedida> alunoMedidaList;
+	@Column(name = "nome", length = 200)
+	private String nome;
+	@Column(name = "sexo")
+	@Enumerated(EnumType.ORDINAL)
+	private TipoSexo sexo;
+	@Column(name = "data_nascimento")
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 
-    public Aluno() {
-    }
+	@Column(name = "peso", precision = 3, scale = 2)
+	private Double peso;
+	@Column(name = "altura", precision = 2, scale = 2)
+	private Double altura;
 
-    public Aluno(Integer id) {
-        this.id = id;
-    }
+	@Column(name = "codigo_acesso", length = 45)
+	private String codigoAcesso;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+	private List<Contato> contatoList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+	private List<Observacao> observacaoList;
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id", nullable = false)
+	@ManyToOne(optional = false)
+	private Endereco enderecoId;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+	private List<Treino> treinoList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+	private List<AlunoMedida> alunoMedidaList;
 
-    public Integer getId() {
-        return id;
-    }
+	public Aluno() {
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Aluno(Integer id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getSexo() {
-        return sexo;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setSexo(Integer sexo) {
-        this.sexo = sexo;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
+	public TipoSexo getSexo() {
+		return sexo;
+	}
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+	public void setSexo(TipoSexo sexo) {
+		this.sexo = sexo;
+	}
 
-    public Double getPeso() {
-        return peso;
-    }
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public void setPeso(Double peso) {
-        this.peso = peso;
-    }
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
-    public Double getAltura() {
-        return altura;
-    }
+	public Double getPeso() {
+		return peso;
+	}
 
-    public void setAltura(Double altura) {
-        this.altura = altura;
-    }
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
 
-    public String getCodigoAcesso() {
-        return codigoAcesso;
-    }
+	public Double getAltura() {
+		return altura;
+	}
 
-    public void setCodigoAcesso(String codigoAcesso) {
-        this.codigoAcesso = codigoAcesso;
-    }
+	public void setAltura(Double altura) {
+		this.altura = altura;
+	}
 
-    @XmlTransient
-    public List<Contato> getContatoList() {
-        return contatoList;
-    }
+	public String getCodigoAcesso() {
+		return codigoAcesso;
+	}
 
-    public void setContatoList(List<Contato> contatoList) {
-        this.contatoList = contatoList;
-    }
+	public void setCodigoAcesso(String codigoAcesso) {
+		this.codigoAcesso = codigoAcesso;
+	}
 
-    @XmlTransient
-    public List<Observacao> getObservacaoList() {
-        return observacaoList;
-    }
+	@XmlTransient
+	public List<Contato> getContatoList() {
+		return contatoList;
+	}
 
-    public void setObservacaoList(List<Observacao> observacaoList) {
-        this.observacaoList = observacaoList;
-    }
+	public void setContatoList(List<Contato> contatoList) {
+		this.contatoList = contatoList;
+	}
 
-    public Endereco getEnderecoId() {
-        return enderecoId;
-    }
+	@XmlTransient
+	public List<Observacao> getObservacaoList() {
+		return observacaoList;
+	}
 
-    public void setEnderecoId(Endereco enderecoId) {
-        this.enderecoId = enderecoId;
-    }
+	public void setObservacaoList(List<Observacao> observacaoList) {
+		this.observacaoList = observacaoList;
+	}
 
-    @XmlTransient
-    public List<Treino> getTreinoList() {
-        return treinoList;
-    }
+	public Endereco getEnderecoId() {
+		return enderecoId;
+	}
 
-    public void setTreinoList(List<Treino> treinoList) {
-        this.treinoList = treinoList;
-    }
+	public void setEnderecoId(Endereco enderecoId) {
+		this.enderecoId = enderecoId;
+	}
 
-    @XmlTransient
-    public List<AlunoMedida> getAlunoMedidaList() {
-        return alunoMedidaList;
-    }
+	@XmlTransient
+	public List<Treino> getTreinoList() {
+		return treinoList;
+	}
 
-    public void setAlunoMedidaList(List<AlunoMedida> alunoMedidaList) {
-        this.alunoMedidaList = alunoMedidaList;
-    }
+	public void setTreinoList(List<Treino> treinoList) {
+		this.treinoList = treinoList;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	@XmlTransient
+	public List<AlunoMedida> getAlunoMedidaList() {
+		return alunoMedidaList;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Aluno)) {
-            return false;
-        }
-        Aluno other = (Aluno) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	public void setAlunoMedidaList(List<AlunoMedida> alunoMedidaList) {
+		this.alunoMedidaList = alunoMedidaList;
+	}
 
-    @Override
-    public String toString() {
-        return "gerador.Aluno[ id=" + id + " ]";
-    }
-    
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are
+		// not set
+		if (!(object instanceof Aluno)) {
+			return false;
+		}
+		Aluno other = (Aluno) object;
+		if ((this.id == null && other.id != null)
+				|| (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "gerador.Aluno[ id=" + id + " ]";
+	}
+
 }

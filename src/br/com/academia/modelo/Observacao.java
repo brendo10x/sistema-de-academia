@@ -19,7 +19,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany; 
+import javax.persistence.OneToMany;
+import javax.persistence.Table; 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brendo
  */
 @Entity
+@Table(name = "observacao", catalog = "sistema-academia", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Observacao.findAll", query = "SELECT o FROM Observacao o"),
@@ -38,10 +40,10 @@ public class Observacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Column(length = 45)
+ 
+    @Column(name = "valor", length = 45)
     private String valor;
     @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
