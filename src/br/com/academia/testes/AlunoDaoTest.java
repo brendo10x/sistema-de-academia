@@ -17,7 +17,7 @@ public class AlunoDaoTest {
 
 	@Test
 	public final void testListar() {
-		 aluno = alunoDao.carregar(1);
+		 
 	}
 
 	@Test
