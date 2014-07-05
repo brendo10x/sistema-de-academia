@@ -1,7 +1,5 @@
 /*T
  * 
- * TEste
-****noo
 
 */package br.com.academia.conexao;
 
