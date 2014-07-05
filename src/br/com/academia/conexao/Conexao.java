@@ -34,7 +34,7 @@ public class Conexao {
 					.createEntityManagerFactory("ConexaoMysql");
 
 			conexao = fabrica.createEntityManager();
-				System.out.println("Conexão estabelecida -- apagar --");
+				System.out.println("Conexão estabelecida -- apagar  --");
 			return conexao;
 		}
 
