@@ -1,6 +1,6 @@
 package br.com.academia.conexao;
 
-///Aqui weslly alguma alteração
+//Aqui weslly alguma alteração
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
