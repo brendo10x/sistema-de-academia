@@ -20,6 +20,7 @@ public class Conexao {
 	}// fim construtor padrão
 
 	/*
+	 * *
 	 * Recupera gerenciador de entidades com conexão com o banco de dado mysql
 	 */
 
