@@ -1,7 +1,4 @@
-/*T
- * 
-
-*/package br.com.academia.conexao;
+package br.com.academia.conexao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,7 +29,7 @@ public class Conexao {
 					.createEntityManagerFactory("ConexaoMysql");
 
 			conexao = fabrica.createEntityManager();
-				System.out.println("Conexão estabelecida --deletar --");
+			
 			return conexao;
 		}
 
