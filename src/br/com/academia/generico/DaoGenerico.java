@@ -23,7 +23,7 @@ public abstract class DaoGenerico<Tipo> {
 	@SuppressWarnings("unchecked")
 	protected DaoGenerico() {
 
-		// obtem a tipo da subclasse
+		// obtem a tipo da classe que está usando o DaoGenerico em tempo de execução
 		classePersistente = (Class<Tipo>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 
@@ -38,7 +38,7 @@ public abstract class DaoGenerico<Tipo> {
 			// inicia a transação
 			gerEnt.getTransaction().begin();
 
-			// adiciona proprietário
+			// adiciona 
 			gerEnt.persist(t);
 
 			// transação com sucesso
@@ -92,7 +92,7 @@ public abstract class DaoGenerico<Tipo> {
 
 			Tipo t = (Tipo) gerEnt.find(classePersistente, id);
 
-			// exclui cliente
+			// exclui objeto
 			gerEnt.remove(t);
 
 			// transação com sucesso
