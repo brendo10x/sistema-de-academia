@@ -1,4 +1,7 @@
-package br.com.academia.conexao;
+/*T
+ * 
+
+*/package br.com.academia.conexao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,6 +18,7 @@ public class Conexao {
 	}// fim construtor padrão
 
 	/*
+	 * *
 	 * Recupera gerenciador de entidades com conexão com o banco de dado mysql
 	 */
 
@@ -28,7 +32,7 @@ public class Conexao {
 					.createEntityManagerFactory("ConexaoMysql");
 
 			conexao = fabrica.createEntityManager();
-
+				System.out.println("Conexão estabelecida --deletar --");
 			return conexao;
 		}
 
