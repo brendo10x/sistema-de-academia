@@ -1,9 +1,13 @@
 package br.com.academia.dao;
 
-import br.com.academia.generico.DaoGenerico; 
+import java.util.List;
+
+import br.com.academia.generico.DaoGenerico;
 import br.com.academia.modelo.Aluno;
 
-public class AlunoDao extends DaoGenerico<Aluno>{
-	
-	 
+public class AlunoDao extends DaoGenerico<Aluno> {
+
+	public List<Aluno> listarTodos() {
+		return super.listar("Aluno.findAll");
+	}
 }

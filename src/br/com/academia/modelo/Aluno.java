@@ -65,9 +65,9 @@ public class Aluno implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
-	@Column(name = "peso", precision = 3, scale = 2)
+	@Column(name = "peso", precision = 4, scale = 2)
 	private Double peso;
-	@Column(name = "altura", precision = 2, scale = 2)
+	@Column(name = "altura", precision = 4, scale = 2)
 	private Double altura;
 
 	@Column(name = "codigo_acesso", length = 45)
