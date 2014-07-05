@@ -1,5 +1,7 @@
 package br.com.academia.conexao;
 
+//Alterei aqui e no de weslly
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
