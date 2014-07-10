@@ -214,6 +214,7 @@ public class AlunoDaoTest {
 	}
 
 	@Test
+	@Ignore
 	public void testAtualizar() {
 
 		aluno = dao.carregar(ID_CARREGAR_OU_ATUALIZAR_OU_ALTERAR);
