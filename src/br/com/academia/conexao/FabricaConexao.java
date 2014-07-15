@@ -5,12 +5,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 //Aplicando o padrão de projeto Singleton
-public class Conexao {
+public class FabricaConexao {
 
 	// variáveis de fábricas de gerenciador de entidades
 	private static EntityManager conexao = null;
 
-	private Conexao() {
+	private FabricaConexao() {
 
 	}// fim construtor padrão
 
@@ -33,6 +33,7 @@ public class Conexao {
 			return conexao;
 		}
 
+		
 		// retorna gerenciador de entidades
 		// retornando sempre um única instância
 		return conexao;

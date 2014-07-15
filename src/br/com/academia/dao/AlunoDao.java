@@ -7,7 +7,5 @@ import br.com.academia.modelo.Aluno;
 
 public class AlunoDao extends DaoGenerico<Aluno> {
 
-	public List<Aluno> listarTodos() {
-		return super.listar("Aluno.findAll");
-	}
+	
 }

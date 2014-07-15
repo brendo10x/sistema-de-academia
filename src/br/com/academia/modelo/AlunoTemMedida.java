@@ -24,10 +24,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Brendo
- */
+
 @Entity
 @Table(name = "aluno_tem_medida")
 @XmlRootElement

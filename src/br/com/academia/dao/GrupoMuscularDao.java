@@ -8,7 +8,4 @@ import br.com.academia.modelo.Medida;
 
 public class GrupoMuscularDao extends DaoGenerico<GrupoMuscular> {
 
-	public List<GrupoMuscular> listarTodos() {
-		return super.listar("GrupoMuscular.findAll");
-	}
 }

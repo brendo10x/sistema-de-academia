@@ -48,6 +48,7 @@ import br.com.academia.enums.TipoSexo;
 		@NamedQuery(name = "Aluno.findByPeso", query = "SELECT a FROM Aluno a WHERE a.peso = :peso"),
 		@NamedQuery(name = "Aluno.findByAltura", query = "SELECT a FROM Aluno a WHERE a.altura = :altura"),
 		@NamedQuery(name = "Aluno.findByCodigoAcesso", query = "SELECT a FROM Aluno a WHERE a.codigoAcesso = :codigoAcesso") })
+
 public class Aluno implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -191,31 +192,114 @@ public class Aluno implements Serializable {
 		this.alunoMedidaList = alunoMedidaList;
 	}
 
+
+	
+	
+	
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((altura == null) ? 0 : altura.hashCode());
+		result = prime * result
+				+ ((alunoMedidaList == null) ? 0 : alunoMedidaList.hashCode());
+		result = prime * result
+				+ ((codigoAcesso == null) ? 0 : codigoAcesso.hashCode());
+		result = prime * result
+				+ ((contatoList == null) ? 0 : contatoList.hashCode());
+		result = prime * result
+				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result
+				+ ((enderecoId == null) ? 0 : enderecoId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((observacaoList == null) ? 0 : observacaoList.hashCode());
+		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
+		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
+		result = prime * result
+				+ ((treinoList == null) ? 0 : treinoList.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof Aluno)) {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		Aluno other = (Aluno) object;
-		if ((this.id == null && other.id != null)
-				|| (this.id != null && !this.id.equals(other.id))) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
+		Aluno other = (Aluno) obj;
+		if (altura == null) {
+			if (other.altura != null)
+				return false;
+		} else if (!altura.equals(other.altura))
+			return false;
+		if (alunoMedidaList == null) {
+			if (other.alunoMedidaList != null)
+				return false;
+		} else if (!alunoMedidaList.equals(other.alunoMedidaList))
+			return false;
+		if (codigoAcesso == null) {
+			if (other.codigoAcesso != null)
+				return false;
+		} else if (!codigoAcesso.equals(other.codigoAcesso))
+			return false;
+		if (contatoList == null) {
+			if (other.contatoList != null)
+				return false;
+		} else if (!contatoList.equals(other.contatoList))
+			return false;
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
+				return false;
+		} else if (!dataNascimento.equals(other.dataNascimento))
+			return false;
+		if (enderecoId == null) {
+			if (other.enderecoId != null)
+				return false;
+		} else if (!enderecoId.equals(other.enderecoId))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (observacaoList == null) {
+			if (other.observacaoList != null)
+				return false;
+		} else if (!observacaoList.equals(other.observacaoList))
+			return false;
+		if (peso == null) {
+			if (other.peso != null)
+				return false;
+		} else if (!peso.equals(other.peso))
+			return false;
+		if (sexo != other.sexo)
+			return false;
+		if (treinoList == null) {
+			if (other.treinoList != null)
+				return false;
+		} else if (!treinoList.equals(other.treinoList))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "gerador.Aluno[ id=" + id + " ]";
+		return "Aluno [id=" + id + ", nome=" + nome + ", sexo=" + sexo
+				+ ", dataNascimento=" + dataNascimento + ", peso=" + peso
+				+ ", altura=" + altura + ", codigoAcesso=" + codigoAcesso
+				+ ", contatoList=" + contatoList + ", observacaoList="
+				+ observacaoList + ", enderecoId=" + enderecoId
+				+ ", treinoList=" + treinoList + ", alunoMedidaList="
+				+ alunoMedidaList + "]";
 	}
 
 }

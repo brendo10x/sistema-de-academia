@@ -8,7 +8,5 @@ import br.com.academia.modelo.Pergunta;
 
 public class ExercicioDao extends DaoGenerico<Exercicio> {
 
-	public List<Exercicio> listarTodos() {
-		return super.listar("Exercicio.findAll");
-	}
+	
 }

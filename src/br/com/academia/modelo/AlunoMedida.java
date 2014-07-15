@@ -27,10 +27,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Brendo
- */
+
 @Entity
 @Table(name = "aluno_medida")
 @XmlRootElement
@@ -38,8 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AlunoMedida.findAll", query = "SELECT a FROM AlunoMedida a"),
     @NamedQuery(name = "AlunoMedida.findById", query = "SELECT a FROM AlunoMedida a WHERE a.id = :id"),
     @NamedQuery(name = "AlunoMedida.findByInicio", query = "SELECT a FROM AlunoMedida a WHERE a.inicio = :inicio")})
+
 public class AlunoMedida implements Serializable {
-    private static final long serialVersionUID = 1L;
+  
+	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -55,6 +54,7 @@ public class AlunoMedida implements Serializable {
     private Aluno alunoId;
 
     public AlunoMedida() {
+    
     }
 
     public AlunoMedida(Integer id) {
