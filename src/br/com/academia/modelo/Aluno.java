@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.academia.enums.TipoSexo;
 
+
 /**
  * 
  * @author Brendo

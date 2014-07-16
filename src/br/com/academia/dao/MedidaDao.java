@@ -7,7 +7,5 @@ import br.com.academia.modelo.Medida;
 
 public class MedidaDao extends DaoGenerico<Medida> {
 
-	public List<Medida> listarTodos() {
-		return super.listar("Medida.findAll");
-	}
+
 }
