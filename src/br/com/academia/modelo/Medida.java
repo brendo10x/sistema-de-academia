@@ -8,6 +8,7 @@ package br.com.academia.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -89,29 +90,58 @@ public class Medida implements Serializable {
         this.alunoTemMedidaList = alunoTemMedidaList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((alunoTemMedidaList == null) ? 0 : alunoTemMedidaList
+						.hashCode());
+		result = prime * result + ((campo == null) ? 0 : campo.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((local == null) ? 0 : local.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Medida)) {
-            return false;
-        }
-        Medida other = (Medida) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Medida other = (Medida) obj;
+		if (alunoTemMedidaList == null) {
+			if (other.alunoTemMedidaList != null)
+				return false;
+		} else if (!alunoTemMedidaList.equals(other.alunoTemMedidaList))
+			return false;
+		if (campo == null) {
+			if (other.campo != null)
+				return false;
+		} else if (!campo.equals(other.campo))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (local == null) {
+			if (other.local != null)
+				return false;
+		} else if (!local.equals(other.local))
+			return false;
+		return true;
+	}
 
-    @Override
-    public String toString() {
-        return "gerador.Medida[ id=" + id + " ]";
-    }
+	@Override
+	public String toString() {
+		return "Medida [id=" + id + ", local=" + local + ", campo=" + campo
+				+ ", alunoTemMedidaList=" + alunoTemMedidaList + "]";
+	}
+
+
     
 }
