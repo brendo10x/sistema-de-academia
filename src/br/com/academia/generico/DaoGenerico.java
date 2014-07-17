@@ -21,7 +21,6 @@ public abstract class DaoGenerico<Tipo> {
 
 	private EntityManager gerEnt;
 	private Class<Tipo> classePersistente;
-	public Integer ultimoID;
 
 	@SuppressWarnings("unchecked")
 	protected DaoGenerico() {
