@@ -8,6 +8,7 @@ package br.com.academia.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,10 +25,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- * 
- * @author Brendo
- */
 @Entity
 @Table(name = "cidade")
 @XmlRootElement
@@ -105,29 +102,62 @@ public class Cidade implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((enderecoList == null) ? 0 : enderecoList.hashCode());
+		result = prime * result
+				+ ((estadoId == null) ? 0 : estadoId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof Cidade)) {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		Cidade other = (Cidade) object;
-		if ((this.id == null && other.id != null)
-				|| (this.id != null && !this.id.equals(other.id))) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
+		Cidade other = (Cidade) obj;
+		if (enderecoList == null) {
+			if (other.enderecoList != null)
+				return false;
+		} else if (!enderecoList.equals(other.enderecoList))
+			return false;
+		if (estadoId == null) {
+			if (other.estadoId != null)
+				return false;
+		} else if (!estadoId.equals(other.estadoId))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (sigla == null) {
+			if (other.sigla != null)
+				return false;
+		} else if (!sigla.equals(other.sigla))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "gerador.Cidade[ id=" + id + " ]";
+		return "Cidade [id=" + id + ", sigla=" + sigla + ", nome=" + nome
+				+ ", estadoId=" + estadoId + ", enderecoList=" + enderecoList
+				+ "]";
 	}
+
+
 
 }

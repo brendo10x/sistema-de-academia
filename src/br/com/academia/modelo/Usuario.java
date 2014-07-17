@@ -8,6 +8,7 @@ package br.com.academia.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,10 +23,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- * 
- * @author Brendo
- */
+
 @Entity
 @Table(name = "usuario")
 @XmlRootElement
@@ -109,32 +107,62 @@ public class Usuario implements Serializable {
 	public void setTreinadorList(List<Treinador> treinadorList) {
 		this.treinadorList = treinadorList;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result
+				+ ((treinadorList == null) ? 0 : treinadorList.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof Usuario)) {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		Usuario other = (Usuario) object;
-		if ((this.id == null && other.id != null)
-				|| (this.id != null && !this.id.equals(other.id))) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
+		Usuario other = (Usuario) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
+		if (treinadorList == null) {
+			if (other.treinadorList != null)
+				return false;
+		} else if (!treinadorList.equals(other.treinadorList))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "gerador.Usuario[ id=" + id + " ]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email
+				+ ", senha=" + senha + ", treinadorList=" + treinadorList + "]";
 	}
+
 
 }

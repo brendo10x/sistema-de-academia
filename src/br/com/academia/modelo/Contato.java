@@ -25,10 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.academia.enums.TipoContato;
 
-/**
- * 
- * @author Brendo
- */
+
+ 
 @Entity
 @Table(name = "contato")
 @XmlRootElement
@@ -44,6 +42,7 @@ public class Contato implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id", nullable = false)
 	private Integer id;
+	
 	@Column(name = "tipo")
 	@Enumerated(EnumType.ORDINAL)
 	private TipoContato tipo;
@@ -95,29 +94,50 @@ public class Contato implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alunoId == null) ? 0 : alunoId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof Contato)) {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		Contato other = (Contato) object;
-		if ((this.id == null && other.id != null)
-				|| (this.id != null && !this.id.equals(other.id))) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
+		Contato other = (Contato) obj;
+		if (alunoId == null) {
+			if (other.alunoId != null)
+				return false;
+		} else if (!alunoId.equals(other.alunoId))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (tipo != other.tipo)
+			return false;
+		if (valor == null) {
+			if (other.valor != null)
+				return false;
+		} else if (!valor.equals(other.valor))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "gerador.Contato[ id=" + id + " ]";
+		return "Contato [id=" + id + ", tipo=" + tipo + ", valor=" + valor
+				+ ", alunoId=" + alunoId + "]";
 	}
+
+
 
 }

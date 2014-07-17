@@ -9,11 +9,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 
-import br.com.academia.conexao.Conexao;
+import org.hibernate.TransactionException;
+
+import br.com.academia.conexao.FabricaConexao;
 
 /**
  * Classe genérica do Dao
  * */
+@SuppressWarnings("unchecked")
 public abstract class DaoGenerico<Tipo> {
 
 	private EntityManager gerEnt;
@@ -23,109 +26,151 @@ public abstract class DaoGenerico<Tipo> {
 	@SuppressWarnings("unchecked")
 	protected DaoGenerico() {
 
-		// obtem a tipo da classe que está usando o DaoGenerico em tempo de execução
+		// obtem a tipo da classe que está usando o DaoGenerico em tempo de
+		// execução
 		classePersistente = (Class<Tipo>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 
-		// entrega instância do tipo EntityManager com conexão mysql
-		gerEnt = Conexao.getInstanciaConexao();
+	
 	}
-
+	private EntityManager conexao;
+	
 	public void salvar(Tipo t) {
+		// entrega instância do tipo EntityManager com conexão mysql
+		conexao = FabricaConexao.getInstanciaConexao();
 
 		try {
 
 			// inicia a transação
-			gerEnt.getTransaction().begin();
+			conexao.getTransaction().begin();
 
-			// adiciona 
+			// adiciona
 			gerEnt.persist(t);
 
-			// transação com sucesso
-			gerEnt.getTransaction().commit();
+			// adiciona proprietário
+			conexao.persist(t);
 
-		} catch (Exception e) {
+			// transação com sucesso
+			conexao.getTransaction().commit();
+
+		} catch (TransactionException e) {
 
 			// transação ocorreu erro
-			gerEnt.getTransaction().rollback();
+			conexao.getTransaction().rollback();
 
-			// mostra erro
-			e.printStackTrace();
-
+			// sempre sera execultado
+		} finally {
+			// fecha a conexão
+			conexao.close();
 		}// fim catch e try
 
 	}
 
 	public void atualizar(Tipo t) {
 
+		// entrega instância do tipo EntityManager com conexão mysql
+		conexao = FabricaConexao.getInstanciaConexao();
+
 		try {
 
 			// inicia a transação
-			gerEnt.getTransaction().begin();
+			conexao.getTransaction().begin();
 
 			// atuliza
-			gerEnt.merge(t);
+			conexao.merge(t);
 
 			// transação com sucesso
-			gerEnt.getTransaction().commit();
+			conexao.getTransaction().commit();
 
-		} catch (Exception e) {
+		} catch (TransactionException e) {
 
 			// transação ocorreu erro
-			gerEnt.getTransaction().rollback();
+			conexao.getTransaction().rollback();
 
-			// mostra erro
-			e.printStackTrace();
-
-		}// fim catch e try
+		} finally {
+			// fecha conexão
+			conexao.close();
+		}// fim do try catch finally
 
 	}
 
 	public void excluir(Integer id) {
-
+		
+		conexao = FabricaConexao.getInstanciaConexao();
+		
 		try {
 
 			// inicia transação
-			gerEnt.getTransaction().begin();
+			conexao.getTransaction().begin();
 
 			// carrega objeto
 
-			Tipo t = (Tipo) gerEnt.find(classePersistente, id);
+			Tipo t = (Tipo) conexao.find(DevolveTipoClasse(), id);
+
 
 			// exclui objeto
 			gerEnt.remove(t);
 
-			// transação com sucesso
-			gerEnt.getTransaction().commit();
+			// exclui cliente
+			conexao.remove(t);
 
-		} catch (Exception e) {
+
+			// transação com sucesso
+			conexao.getTransaction().commit();
+
+		} catch (TransactionException e) {
 
 			// transação ocorreu erro
-			gerEnt.getTransaction().rollback();
+			conexao.getTransaction().rollback();
 
-			// mostra erro
-			e.getCause();
-
+		}finally{
+			conexao.close();
 		}// fim catch e try
 
 	}
 
 	public Tipo carregar(Integer id) {
 
-		Tipo t = (Tipo) gerEnt.find(classePersistente, id);
+		conexao = FabricaConexao.getInstanciaConexao();
+		Tipo t = null;
 
+		try {
+			t = (Tipo) conexao.find(DevolveTipoClasse(), id);
+
+		} catch (TransactionException e) {
+
+			// mostra o erro
+			e.getStackTrace();
+
+		} finally {
+			conexao.close();
+
+		}
 		return t;
-
 	}
 
-	protected List<Tipo> listar(String strConsulta) {
+	public List<Tipo> listar(String strConsulta) {
 
-		TypedQuery<Tipo> tpQConsulta = (TypedQuery<Tipo>) gerEnt
-				.createNamedQuery(strConsulta, classePersistente);
+		TypedQuery<Tipo> tpQConsulta = (TypedQuery<Tipo>) conexao
+				.createNamedQuery(strConsulta, DevolveTipoClasse());
 
 		List<Tipo> resultados = tpQConsulta.getResultList();
 
 		return resultados;
+	}
+
+	public List<Tipo> listarTodos() {
+
+		return listar(DevolveTipoClasse() + ".findAll");
+
+	}
+
+	private Class<?> DevolveTipoClasse() {
+
+		Class<?> classe = (Class<?>) ((ParameterizedType) this.getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[0];
+
+		return classe;
 	}
 
 }

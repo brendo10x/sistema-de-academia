@@ -25,10 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.academia.enums.TipoResposta;
 
-/**
- * 
- * @author Brendo
- */
+
 @Entity
 @Table(name = "valor_observacao")
 @XmlRootElement
