@@ -1,8 +1,10 @@
 package br.com.academia.conexao;
-//
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+///Aqui
 
 //Aplicando o padrão de projeto Singleton
 public class Conexao {
