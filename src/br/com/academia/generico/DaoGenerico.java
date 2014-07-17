@@ -14,37 +14,37 @@ import org.hibernate.TransactionException;
 import br.com.academia.conexao.FabricaConexao;
 
 /**
- * Classe genérica do Dao
+
  * */
 @SuppressWarnings("unchecked")
 public abstract class DaoGenerico<Tipo> {
 
 	private EntityManager conexao;
-
+	
 
 	public void salvar(Tipo t) {
-	// entrega instância do tipo EntityManager com conexão mysql
+	// entrega instï¿½ncia do tipo EntityManager com conexï¿½o mysql
 		conexao = FabricaConexao.getInstanciaConexao();
 		
 		try {
 
-			// inicia a transação
+			// inicia a transaï¿½ï¿½o
 			conexao.getTransaction().begin();
 
-			// adiciona proprietário
+			// adiciona proprietï¿½rio
 			conexao.persist(t);
 
-			// transação com sucesso
+			// transaï¿½ï¿½o com sucesso
 			conexao.getTransaction().commit();
 
 		} catch (TransactionException e) {
 
-			// transação ocorreu erro
+			// transaï¿½ï¿½o ocorreu erro
 			conexao.getTransaction().rollback();
 			
 			//sempre sera execultado
 		} finally{
-			//fecha a conexão
+			//fecha a conexï¿½o
 			conexao.close();
 		}// fim catch e try
 
@@ -52,27 +52,27 @@ public abstract class DaoGenerico<Tipo> {
 
 	public void atualizar(Tipo t) {
 		
-		// entrega instância do tipo EntityManager com conexão mysql
+		// entrega instï¿½ncia do tipo EntityManager com conexï¿½o mysql
 		conexao = FabricaConexao.getInstanciaConexao();
 		
 		try {
 
-			// inicia a transação
+			// inicia a transaï¿½ï¿½o
 			conexao.getTransaction().begin();
 
 			// atuliza
 			conexao.merge(t);
 
-			// transação com sucesso
+			// transaï¿½ï¿½o com sucesso
 			conexao.getTransaction().commit();
 
 		} catch (TransactionException e) {
 
-			// transação ocorreu erro
+			// transaï¿½ï¿½o ocorreu erro
 			conexao.getTransaction().rollback();
 
 		}finally{
-			//fecha conexão
+			//fecha conexï¿½o
 			conexao.close();	
 		}//fim do try catch finally
 
@@ -84,7 +84,7 @@ public abstract class DaoGenerico<Tipo> {
 		
 		try {
 
-			// inicia transação
+			// inicia transaï¿½ï¿½o
 			conexao.getTransaction().begin();
 
 			// carrega objeto
@@ -94,12 +94,12 @@ public abstract class DaoGenerico<Tipo> {
 			// exclui cliente
 			conexao.remove(t);
 
-			// transação com sucesso
+			// transaï¿½ï¿½o com sucesso
 			conexao.getTransaction().commit();
 
 		} catch (TransactionException e) {
 
-			// transação ocorreu erro
+			// transaï¿½ï¿½o ocorreu erro
 			conexao.getTransaction().rollback();
 
 		}finally{
@@ -129,12 +129,18 @@ public abstract class DaoGenerico<Tipo> {
 	}
 
 	public List<Tipo> listar(String strConsulta) {
-
-		TypedQuery<Tipo> tpQConsulta = (TypedQuery<Tipo>) conexao
+		TypedQuery<Tipo> tpQConsulta = null;
+		List<Tipo> resultados  = null;
+		try{
+			////So pra testar nÃ£o sei qual tipo de exceÃ§Ã£o tem que tratar aqui
+		tpQConsulta = (TypedQuery<Tipo>) conexao
 				.createNamedQuery(strConsulta, DevolveTipoClasse());
 
-		List<Tipo> resultados = tpQConsulta.getResultList();
-
+		resultados = tpQConsulta.getResultList();
+		
+		}catch(TransactionException e){
+			
+		}
 		return resultados;
 	}
 	
